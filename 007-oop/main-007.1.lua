@@ -1,18 +1,20 @@
 -- http://lua-users.org/wiki/SimpleLuaClasses
 Person = {
-  name
+  name,
+  type = "Enterprise"
 }
 
 function Person:new(instance, name)
   instance = instance or {}
   setmetatable(instance, self)
   self.__index = self
-  self.name = name
+  instance.name = name
   return instance
 end
 
 -- static method
 function Person.toLowerCase(str)
+  print(Person.type) -- accessing as a static field
   return string.lower(str)
 end
 
@@ -21,7 +23,13 @@ function Person:say()
   print(string.format("Hello World, my name is: %s!!!", self.name))
 end
 
-local ana = Person:new(nil, "Ana Carolina")
+local people = {}
+table.insert(people, Person:new(nil, "Ana Carolina"))
+table.insert(people, Person:new(nil, "Bruna"))
 
-ana:say()
+for i, v in ipairs(people) do
+  v:say()
+end
+
+-- static method call
 print(Person.toLowerCase("HELLO WORLD"))
