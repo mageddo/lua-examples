@@ -1,18 +1,27 @@
+-- http://lua-users.org/wiki/SimpleLuaClasses
 Person = {
   name
 }
 
-function Person:new(instanc, name)
-  instanc = instanc or {}
-  setmetatable(instanc, self)
+function Person:new(instance, name)
+  instance = instance or {}
+  setmetatable(instance, self)
   self.__index = self
   self.name = name
-  return instanc
+  return instance
 end
 
+-- static method
+function Person.toLowerCase(str)
+  return string.lower(str)
+end
+
+-- instance method
 function Person:say()
-  io.write(string.format("Hello World, my name is: %s!!!", self.name))
+  print(string.format("Hello World, my name is: %s!!!", self.name))
 end
 
 local ana = Person:new(nil, "Ana Carolina")
+
 ana:say()
+print(Person.toLowerCase("HELLO WORLD"))
