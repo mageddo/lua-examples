@@ -1,3 +1,6 @@
+-- coroutines can't run in parallel
+-- they just can be suspended then resumed using coroutine.yield
+
 function luaSleep(s)
 local ntime = os.clock() + s/10
 repeat until os.clock() > ntime
