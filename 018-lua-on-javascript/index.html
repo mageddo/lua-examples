@@ -11,7 +11,31 @@ body {
 <script type="application/lua">
 print("You call run some lua code here")
 </script>
-<script src="./hello-world.lua" type="application/lua"></script>
+<script src="./lua-script.lua" type="application/lua"></script> 
 <script type="application/javascript">
-setInterval(() => document.body.innerHTML = randomWord(), 1000);
+
+fengari.load(`
+function randomWord2()
+  local str = "";
+  for i=0, 5 do
+    str = str .. string.char(math.random(97, 122))
+  end
+  return {
+    word = str
+  }
+end
+js.global.randomWord2 = randomWord2
+`)();
+
+
+setInterval(() => document.querySelector("#lua-file").innerHTML = randomWord().get("word"), 1000);
+
+setInterval(() => document.querySelector("#lua-script-str").innerHTML = randomWord2().get("word"), 1000);
+
 </script>
+
+<h2>From lua script file: </h2>
+<div id="lua-file"></div>
+
+<h2>From lua script str: </h2>
+<div id="lua-script-str"></div>
