@@ -6,9 +6,5 @@ function randomWord()
   return str
 end
 
-function luaRandomWord()
-  return randomWord()
-end
-
 
 js.global.randomWord = randomWord
